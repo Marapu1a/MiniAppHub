@@ -1,4 +1,4 @@
-/* src/styles/App.css */
+/* src/App.css */
 
 /* Сброс базовых отступов и стилей */
 *,
@@ -11,32 +11,61 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Основные стили для тёмной и светлой темы */
+nav, button {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Telegram-стиль: Тёмная тема */
 [data-theme='dark'] {
-  background-color: #333;
-  color: #f9f9f9;
+  background-color: #1c2330; /* Тёмно-синий */
+  color: #ffffff;
 }
 
+[data-theme='dark'] nav {
+  background-color: #222d3a;
+}
+
+[data-theme='dark'] a {
+  color: #0088cc; /* Основной синий Telegram */
+}
+
+[data-theme='dark'] button {
+  background-color: #2a3b4c;
+  color: #ffffff;
+  border: 1px solid #0088cc;
+}
+
+/* Telegram-стиль: Смягчённая светлая тема */
 [data-theme='light'] {
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #f5f7fa; /* Очень светло-серый фон */
+  color: #2e3a46; /* Тёмно-синий для текста */
+}
+
+[data-theme='light'] nav {
+  background-color: #e0e6ed; /* Мягкий серый для навигации */
+}
+
+[data-theme='light'] a {
+  color: #0078a8; /* Приглушённый синий для ссылок */
+}
+
+[data-theme='light'] button {
+  background-color: #d6e1eb; /* Светло-серый для кнопок */
+  color: #2e3a46;
+  border: 1px solid #0078a8;
 }
 
 /* Навигация */
 nav {
-  background-color: #333;
-  color: white;
   padding: 1rem;
   display: flex;
   justify-content: space-around;
 }
 
 nav a {
-  color: white;
   text-decoration: none;
 }
 
@@ -53,22 +82,11 @@ main {
 button {
   padding: 0.5rem 1rem;
   margin: 0.5rem;
-  border: none;
-  cursor: pointer;
   border-radius: 4px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 button:hover {
   opacity: 0.9;
-}
-
-[data-theme='dark'] button {
-  background-color: #555;
-  color: white;
-}
-
-[data-theme='light'] button {
-  background-color: #ddd;
-  color: #333;
 }
