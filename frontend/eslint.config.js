@@ -1,28 +1,40 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import prettierPlugin from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
 
-export default tseslint.config(
-  { ignores: ['dist'] },
+export default [
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.ts', '**/*.tsx'], // Файлы, которые проверяются
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      parser: tsParser, // Используем парсер TypeScript
+      parserOptions: {
+        ecmaFeatures: { jsx: true }, // Поддержка JSX
+        ecmaVersion: 'latest', // Версия ECMAScript
+        sourceType: 'module', // Модули ES
+      },
     },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      '@typescript-eslint': tsPlugin, // Плагин TypeScript
+      react: reactPlugin, // Плагин React
+      'react-hooks': reactHooksPlugin, // Правила для React hooks
+      prettier: prettierPlugin, // Интеграция Prettier
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
+      ...prettierConfig.rules, // Используем правила из Prettier
+      'prettier/prettier': 'error', // Ошибка, если код не форматирован Prettier
+      'react/react-in-jsx-scope': 'off', // Не нужен React import в новых версиях
+      'react/jsx-uses-react': 'off', // Тоже не нужен
+      'react-hooks/rules-of-hooks': 'error', // Проверка использования хуков
+      'react-hooks/exhaustive-deps': 'warn', // Предупреждение о зависимостях в хуках
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' }, // Игнорируем переменные с префиксом "_"
       ],
+      'no-console': 'warn', // Предупреждение при console.log
+      'no-debugger': 'warn', // Предупреждение при использовании debugger
     },
   },
-)
+];

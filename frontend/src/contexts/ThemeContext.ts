@@ -12,4 +12,6 @@ export interface ThemeContextProps {
 }
 
 // Создаем контекст
-export const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextProps | undefined>(
+  undefined,
+);

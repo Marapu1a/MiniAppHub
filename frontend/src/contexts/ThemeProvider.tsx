@@ -4,7 +4,8 @@ import { ThemeContext, ThemeContextProps } from './ThemeContext';
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemeContextProps['theme']>('dark');
-  const [fontSize, setFontSize] = useState<ThemeContextProps['fontSize']>('medium');
+  const [fontSize, setFontSize] =
+    useState<ThemeContextProps['fontSize']>('medium');
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
@@ -15,7 +16,9 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, fontSize, toggleTheme, setFontSize }}>
+    <ThemeContext.Provider
+      value={{ theme, fontSize, toggleTheme, setFontSize }}
+    >
       {children}
     </ThemeContext.Provider>
   );
